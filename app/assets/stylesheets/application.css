@@ -1,0 +1,63 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+/* Custom styles for the support bot application */
+.chat-messages {
+  border: 1px solid #dee2e6;
+}
+
+.message-content {
+  display: inline-block;
+  max-width: 80%;
+}
+
+.bot-message .message-content {
+  background-color: #f0f7ff;
+  border-radius: 15px 15px 15px 0;
+}
+
+.user-message {
+  text-align: right;
+}
+
+.user-message .message-content {
+  background-color: #e9ecef;
+  border-radius: 15px 15px 0 15px;
+  text-align: left;
+}
+
+/* Typing indicator */
+.typing-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  margin-right: 4px;
+  animation: typing 1s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}

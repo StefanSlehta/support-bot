@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><%= @customer.name %> Bot</h1>
+    <%= link_to "Back to Customers", customers_path, class: "btn btn-outline-secondary" %>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="bot-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="chat-tab" data-bs-toggle="tab" data-bs-target="#chat" type="button" role="tab" aria-controls="chat" aria-selected="true">Chat</button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body p-0">
+          <div class="tab-content" id="bot-tab-content">
+            <div class="tab-pane fade show active h-100" id="chat" role="tabpanel" aria-labelledby="chat-tab">
+              <div class="chat-container p-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="m-0">Chat Interface</h5>
+                  <button id="toggle-chat" class="btn btn-outline-primary btn-sm" onclick="window.botpress.toggle()">
+                    <i class="bi bi-chat"></i> Toggle Chat
+                  </button>
+                </div>
+                <div id="webchat-container" style="height: 600px; width: 100%;">
+                </div>
+                <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    window.botpressWebChat = window.botpress.init({
+                      "botId": "44e05cde-72f2-40dd-be91-6108a9527994",
+                      "hostUrl": "https://cdn.botpress.cloud/webchat/v2.2",
+                      "messagingUrl": "https://messaging.botpress.cloud",
+                      "clientId": "1a8aeb86-b901-4e6a-9c80-18d075c39a46",
+                      "containerWidth": "100%",
+                      "layoutWidth": "100%",
+                      "hideWidget": true,
+                      "configuration": {
+                        "composerPlaceholder": "Napisite svoje pitanje",
+                        "botName": "Support",
+                        "botDescription": "This is a support agent",
+                        "website": {},
+                        "email": {},
+                        "phone": {},
+                        "termsOfService": {},
+                        "privacyPolicy": {},
+                        "color": "#5eb1ef",
+                        "variant": "soft",
+                        "themeMode": "light",
+                        "fontFamily": "inter",
+                        "radius": 1
+                      }
+                    });
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h5>Customer Information</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Name:</strong> <%= @customer.name %></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Database Connection:</strong> <span class="text-muted"><%= @customer.connection_string.to_s.truncate(40) %></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <%= link_to "Edit Customer", edit_customer_path(@customer), class: "btn btn-sm btn-outline-secondary" %>
+        <%= button_to "Remove Customer", customer_path(@customer), method: :delete, class: "btn btn-sm btn-outline-danger", data: { turbo_confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
+</div>

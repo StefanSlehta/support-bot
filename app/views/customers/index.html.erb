@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Customers</h1>
+    <%= link_to "New Customer", new_customer_path, class: "btn btn-primary" %>
+  </div>
+
+  <% if notice.present? %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-body">
+      <% if @customers.any? %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Connection String</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @customers.each do |customer| %>
+                <tr>
+                  <td><%= customer.name %></td>
+                  <td><%= customer.connection_string.to_s.truncate(40) %></td>
+                  <td class="text-end">
+                    <%= link_to "Test Bot", customer_path(customer), class: "btn btn-sm btn-outline-primary" %>
+                    <%= link_to "Edit", edit_customer_path(customer), class: "btn btn-sm btn-outline-secondary" %>
+                    <%= button_to "Remove", customer_path(customer), method: :delete, class: "btn btn-sm btn-outline-danger", form: { style: 'display: inline-block', data: { turbo_confirm: 'Are you sure?' } } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="text-center py-4">
+          <p class="text-muted">No customers yet.</p>
+          <%= link_to "Add your first customer", new_customer_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "Back to Home", root_path, class: "btn btn-link" %>
+  </div>
+</div> 
